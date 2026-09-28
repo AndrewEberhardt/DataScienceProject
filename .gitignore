@@ -1,10 +1,38 @@
 # --- Data ---
-# Raw downloads can be large: keep them local, commit only processed CSVs
+# Keep all data local: nothing under data/ is committed (only the .gitkeep placeholders)
 data/raw/*
 !data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Data files anywhere else in the repo
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.json.gz
+*.parquet
+*.feather
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.nc
+*.npy
+*.npz
 *.zip
+*.gz
+*.tar
+*.7z
 *.tif
 *.tiff
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.gpkg
+*.geojson
 
 # --- Python ---
 __pycache__/

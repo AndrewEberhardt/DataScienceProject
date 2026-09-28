@@ -1,4 +1,6 @@
 """Shared helper functions for the project."""
 
-# Base URL to load processed data directly from GitHub (used in the final article)
-BASE_URL = "https://raw.githubusercontent.com/AndrewEberhardt/datascienceproject/main/data/processed/"
+from pathlib import Path
+
+# Local folder with the processed data (not committed to git, see README "Getting the data")
+DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "processed"
