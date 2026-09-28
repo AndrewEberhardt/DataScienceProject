@@ -27,8 +27,8 @@ We study whether increases in world agricultural commodity prices (soybeans, pal
 ├── requirements.txt
 ├── .gitignore
 ├── data/
-│   ├── raw/            # original downloads (large files are NOT committed, see below)
-│   └── processed/      # cleaned CSVs used by the notebooks (committed, small)
+│   ├── raw/            # original downloads (NOT committed, see "Getting the data")
+│   └── processed/      # cleaned CSVs used by the notebooks (NOT committed)
 ├── notebooks/
 │   ├── 01_data_cleaning.ipynb   # download + clean + merge (not graded)
 │   ├── 02_eda.ipynb             # detailed exploratory analysis (not graded)
@@ -68,12 +68,21 @@ pip install -r requirements.txt
 jupyter lab
 ```
 
-The final notebook `notebooks/article.ipynb` loads its data **by URL** from this repository, so it runs from top to bottom without any local file:
+### Getting the data
+
+Data files are **not stored in this repository** (they are ignored by `.gitignore`). Before running the notebooks:
+
+1. Download the processed files from the team's shared folder: [SharePoint folder](https://epflch-my.sharepoint.com/:f:/r/personal/andrew_eberhardt_epfl_ch/Documents/DataScienceProject?d=w784b1bac4ebe4103a11e659f2aae055c&csf=1&web=1&e=mt8f2b)
+2. Put them in `data/processed/` (and any raw downloads in `data/raw/`).
+
+Notebooks then load the data from the local folder:
 
 ```python
-BASE = "https://raw.githubusercontent.com/AndrewEberhardt/datascienceproject/main/data/processed/"
-panel = pd.read_csv(BASE + "panel.csv")
+from src.utils import DATA_DIR
+panel = pd.read_csv(DATA_DIR / "panel.csv")
 ```
+
+To rebuild the processed files from scratch, download the raw data from the sources above and run `notebooks/01_data_cleaning.ipynb`.
 
 ---
 
@@ -86,7 +95,7 @@ panel = pd.read_csv(BASE + "panel.csv")
 3. **Push and open a Pull Request**; one teammate reviews before merging.
 4. **One notebook = one owner at a time.** Notebooks merge badly, so agree on who edits which notebook. Shared code goes in `src/utils.py`.
 5. **Pull before you start working:** `git pull origin main`
-6. **Large files:** GitHub blocks files over 100 MB and warns above 50 MB. Keep raw downloads in `data/raw/` (ignored by git) and commit only filtered, cleaned CSVs in `data/processed/`.
+6. **Large files:** GitHub blocks files over 100 MB and warns above 50 MB. No data is committed: keep raw downloads in `data/raw/` and cleaned files in `data/processed/` (both ignored by git), and share them through the team folder.
 
 ---
 
