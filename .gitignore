@@ -1,0 +1,27 @@
+# --- Data ---
+# Raw downloads can be large: keep them local, commit only processed CSVs
+data/raw/*
+!data/raw/.gitkeep
+*.zip
+*.tif
+*.tiff
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Secrets ---
+.env

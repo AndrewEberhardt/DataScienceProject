@@ -1,0 +1,24 @@
+# Core
+pandas
+numpy
+openpyxl        # read Excel files (Pink Sheet, Global Forest Watch)
+
+# Visualisation
+matplotlib
+seaborn
+plotly
+
+# Econometrics
+statsmodels
+linearmodels    # panel regressions with fixed effects
+
+# Data access
+wbgapi          # World Bank indicators
+
+# Maps (final report, regional version)
+geopandas
+rasterstats
+
+# Notebooks
+jupyterlab
+nbstripout      # removes notebook outputs before commit, fewer merge conflicts

@@ -1,0 +1,2 @@
+# Keep outputs in the final graded article notebook (excluded from nbstripout)
+notebooks/article.ipynb filter= diff=
