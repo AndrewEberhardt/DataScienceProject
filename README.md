@@ -1,6 +1,6 @@
 # Commodity Prices and Deforestation
 
-**Do commodity booms destroy tropical forests, and can good governance protect them?**
+**Do commodity booms destroy tropical forests?**
 
 Group project for the course *Data Science & Causal Inference for Sustainability* (EPFL).
 
