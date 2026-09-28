@@ -4,7 +4,7 @@
 
 Group project for the course *Data Science & Causal Inference for Sustainability* (EPFL).
 
-Team: Name 1, Name 2, Name 3
+Team: Andrew, David, Pelin
 
 ---
 
