@@ -27,7 +27,7 @@ We study whether increases in world agricultural commodity prices (soybeans, pal
 ├── requirements.txt
 ├── .gitignore
 ├── data/
-│   ├── raw/            # original downloads (NOT committed, see "Getting the data")
+│   ├── raw/            # original downloads (NOT committed, see "Where to put the data")
 │   └── processed/      # cleaned CSVs used by the notebooks (NOT committed)
 ├── notebooks/
 │   ├── 01_data_cleaning.ipynb   # download + clean + merge (not graded)
@@ -68,18 +68,23 @@ pip install -r requirements.txt
 jupyter lab
 ```
 
-### Getting the data
+### Where to put the data
 
-Data files are **not stored in this repository** (they are ignored by `.gitignore`). Before running the notebooks:
+Data files are **never pushed to GitHub**: everything in `data/` (and any CSV, Excel, Parquet, zip... file) is ignored by `.gitignore`. We share data through the team [SharePoint folder](https://epflch-my.sharepoint.com/:f:/r/personal/andrew_eberhardt_epfl_ch/Documents/DataScienceProject?d=w784b1bac4ebe4103a11e659f2aae055c&csf=1&web=1&e=mt8f2b) instead.
 
-1. Download the processed files from the team's shared folder: [SharePoint folder](https://epflch-my.sharepoint.com/:f:/r/personal/andrew_eberhardt_epfl_ch/Documents/DataScienceProject?d=w784b1bac4ebe4103a11e659f2aae055c&csf=1&web=1&e=mt8f2b)
-2. Put them in `data/processed/` (and any raw downloads in `data/raw/`).
+| What | Where on your computer |
+|---|---|
+| Original downloads (Global Forest Watch, World Bank, FAO, QoG...) | `data/raw/` |
+| Cleaned files used by the notebooks | `data/processed/` |
 
-Notebooks then load the data from the local folder:
+**When you start:** download the files from SharePoint and copy them into the same folders on your computer.
+
+**When you add or update a data file:** save it in the right folder above, then upload it to SharePoint so the others get it too. Also note the source and download date in `docs/data_log.md`.
+
+In the notebooks, load the data from the local folder:
 
 ```python
-from src.utils import DATA_DIR
-panel = pd.read_csv(DATA_DIR / "panel.csv")
+panel = pd.read_csv("../data/processed/panel.csv")
 ```
 
 To rebuild the processed files from scratch, download the raw data from the sources above and run `notebooks/01_data_cleaning.ipynb`.
