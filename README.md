@@ -10,7 +10,7 @@ Team: Andrew, David, Pelin
 
 ## Research question
 
-We study whether increases in world agricultural commodity prices (soybeans, palm oil, cocoa, coffee, beef, etc.) cause more deforestation in tropical countries, and whether this effect is weaker where governance is stronger.
+We study whether increases in world agricultural commodity prices (soybeans, palm oil, cocoa, coffee, beef, etc.) cause more deforestation in tropical countries.
 
 - **Outcome:** tree cover loss / primary forest loss (Global Forest Watch)
 - **Main explanatory variable:** country-specific commodity price index (world prices weighted by pre-period crop shares or crop suitability)
@@ -59,16 +59,7 @@ Download date and version of each file must be written in `docs/data_log.md`.
 
 ---
 
-## How to run
-
-```bash
-git clone https://github.com/AndrewEberhardt/datascienceproject.git
-cd datascienceproject
-pip install -r requirements.txt
-jupyter lab
-```
-
-### Where to put the data
+## Where to put the data
 
 Data files are **never pushed to GitHub**: everything in `data/` (and any CSV, Excel, Parquet, zip... file) is ignored by `.gitignore`. We share data through the team [SharePoint folder](https://epflch-my.sharepoint.com/:f:/r/personal/andrew_eberhardt_epfl_ch/Documents/DataScienceProject?d=w784b1bac4ebe4103a11e659f2aae055c&csf=1&web=1&e=mt8f2b) instead.
 
@@ -93,14 +84,46 @@ To rebuild the processed files from scratch, download the raw data from the sour
 
 ## Team workflow
 
-1. **Never work directly on `main`.** Create a branch per task:
-   `git checkout -b eda-prices`
-2. **Commit often** with clear messages:
-   `git commit -m "Add price index by country"`
-3. **Push and open a Pull Request**; one teammate reviews before merging.
-4. **One notebook = one owner at a time.** Notebooks merge badly, so agree on who edits which notebook. Shared code goes in `src/utils.py`.
-5. **Pull before you start working:** `git pull origin main`
-6. **Large files:** GitHub blocks files over 100 MB and warns above 50 MB. No data is committed: keep raw downloads in `data/raw/` and cleaned files in `data/processed/` (both ignored by git), and share them through the team folder.
+We use **GitHub Desktop** to share code and **PyCharm** to write it. Follow these steps every time and nobody will overwrite anyone else's work.
+
+### The 4 golden rules
+
+1. **Never work on `main`.** Always work on your own branch.
+2. **One notebook = one person.** Never edit a notebook that belongs to someone else. If you need their results, read the CSV file they saved.
+3. **Pull before you start, push when you stop.**
+4. **Never push data files.** Data goes on SharePoint (see above).
+
+### Every time you work
+
+**1. Before you start**
+- In GitHub Desktop, click **Current Branch** and choose `main`.
+- Click **Fetch origin**, then **Pull origin**. You now have everyone's latest work.
+- Click **Current Branch → New Branch**, give it a clear name (for example `david-prices`), then **Create Branch** and **Publish branch**.
+
+**2. While you work**
+- Write your code in PyCharm as usual.
+- Every time you finish a small step, go to GitHub Desktop: write a short summary at the bottom left (for example "Clean forest loss data"), click **Commit**, then **Push origin**.
+
+**3. When your task is finished**
+- Click **Create Pull Request**. This opens GitHub in your browser: click **Create pull request**.
+- Tell the group. Someone else checks it and clicks **Merge pull request**.
+- Back in GitHub Desktop, go back to `main` and click **Pull origin**. Start your next task with a new branch.
+
+### Who works on what
+
+| Person | Task | Their files |
+|---|---|---|
+| Andrew | | |
+| David | | |
+| Pelin | | |
+
+Write your name next to a file before you start working on it. Shared functions go in `src/utils.py`: tell the group before changing it.
+
+### If something goes wrong
+
+- **GitHub Desktop says there is a conflict:** don't click anything you are not sure about. Send a screenshot to the group.
+- **For a notebook conflict:** choose **Use the version from main**, then redo your changes in that version.
+- **Never** use "force push", and never click "Discard changes" on a file you did not write.
 
 ---
 
