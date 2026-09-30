@@ -30,10 +30,11 @@ We study whether increases in world agricultural commodity prices (soybeans, pal
 │   ├── raw/            # original downloads (NOT committed, see "Where to put the data")
 │   └── processed/      # cleaned CSVs used by the notebooks (NOT committed)
 ├── notebooks/
-│   ├── 01_data_cleaning.ipynb   # download + clean + merge (not graded)
-│   ├── 02_eda.ipynb             # detailed exploratory analysis (not graded)
-│   ├── 03_analysis.ipynb        # regressions and robustness checks
-│   └── article.ipynb            # FINAL graded article (max 3,000 words)
+│   ├── 01_forest_loss.ipynb               # Andrew: forest loss, clean + explore (not graded)
+│   ├── 02_prices.ipynb                    # David: prices + price index, clean + explore (not graded)
+│   ├── 03_controls_merge_bivariate.ipynb  # Pelin: controls, merge into panel, bivariate (not graded)
+│   ├── 04_analysis.ipynb                  # regressions and robustness checks (after the midterm)
+│   └── article.ipynb                      # FINAL graded article (max 3,000 words)
 ├── src/
 │   └── utils.py        # shared functions (loading, plotting style, price index)
 ├── figures/            # exported graphs for slides and article
@@ -98,7 +99,8 @@ We use **GitHub Desktop** to share code and **PyCharm** to write it. Follow thes
 **1. Before you start**
 - In GitHub Desktop, click **Current Branch** and choose `main`.
 - Click **Fetch origin**, then **Pull origin**. You now have everyone's latest work.
-- Click **Current Branch → New Branch**, give it a clear name (for example `david-prices`), then **Create Branch** and **Publish branch**.
+- Click **Current Branch** and choose **your own branch** (see the table below). The first time, it is already on GitHub: just select it.
+- Click **Branch → Update from main**, so your branch has everyone's merged work.
 
 **2. While you work**
 - Write your code in PyCharm as usual.
@@ -107,17 +109,21 @@ We use **GitHub Desktop** to share code and **PyCharm** to write it. Follow thes
 **3. When your task is finished**
 - Click **Create Pull Request**. This opens GitHub in your browser: click **Create pull request**.
 - Tell the group. Someone else checks it and clicks **Merge pull request**.
-- Back in GitHub Desktop, go back to `main` and click **Pull origin**. Start your next task with a new branch.
+- Back in GitHub Desktop, go back to `main` and click **Pull origin**. For the next task, keep working on your branch (after **Update from main**) or create a new one with **Current Branch → New Branch**.
 
 ### Who works on what
 
-| Person | Task | Their files |
-|---|---|---|
-| Andrew | | |
-| David | | |
-| Pelin | | |
+**Until the midterm (October 15):**
 
-Write your name next to a file before you start working on it. Shared functions go in `src/utils.py`: tell the group before changing it.
+| Person | Task | Their branch | Their files | They produce |
+|---|---|---|---|---|
+| Andrew | Forest loss (Global Forest Watch): cleaning, maps, univariate | `andrew-forest-loss` | `notebooks/01_forest_loss.ipynb` | `forest_loss.csv` |
+| David | Prices (Pink Sheet) and weights (FAOSTAT): price index, univariate | `david-prices` | `notebooks/02_prices.ipynb` | `price_index.csv` |
+| Pelin | Governance and controls, merge, bivariate, causality, literature | `pelin-controls-merge` | `notebooks/03_controls_merge_bivariate.ipynb`, `docs/literature.md` | `panel.csv` |
+
+The three notebooks are connected only through the CSV files in `data/processed/`: Andrew and David share their CSV with Pelin on SharePoint, and Pelin's notebook merges them. Nobody opens someone else's notebook to change it.
+
+After the midterm we will split `04_analysis.ipynb` and `article.ipynb` again, and update this table. Shared functions go in `src/utils.py`: tell the group before changing it.
 
 ### If something goes wrong
 
