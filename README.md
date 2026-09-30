@@ -14,7 +14,7 @@ We study whether increases in world agricultural commodity prices (soybeans, pal
 
 - **Outcome:** tree cover loss / primary forest loss (Global Forest Watch)
 - **Main explanatory variable:** country-specific commodity price index (world prices weighted by pre-period crop shares or crop suitability)
-- **Heterogeneity:** governance quality (Quality of Government dataset)
+- **Heterogeneity:** initial forest cover in 2000 (Global Forest Watch): is the effect stronger where there was more forest left to clear?
 - **Method:** panel regression with country and year fixed effects, lagged prices
 
 ---
@@ -30,10 +30,7 @@ We study whether increases in world agricultural commodity prices (soybeans, pal
 │   ├── raw/            # original downloads (NOT committed, see "Where to put the data")
 │   └── processed/      # cleaned CSVs used by the notebooks (NOT committed)
 ├── notebooks/
-│   ├── 01_data_cleaning.ipynb   # download + clean + merge (not graded)
-│   ├── 02_eda.ipynb             # detailed exploratory analysis (not graded)
-│   ├── 03_analysis.ipynb        # regressions and robustness checks
-│   └── article.ipynb            # FINAL graded article (max 3,000 words)
+│   └── ...               # one notebook per person, plus the final graded article
 ├── src/
 │   └── utils.py        # shared functions (loading, plotting style, price index)
 ├── figures/            # exported graphs for slides and article
@@ -52,7 +49,6 @@ We study whether increases in world agricultural commodity prices (soybeans, pal
 | Commodity prices | World Bank Commodity Price Data (Pink Sheet) | https://www.worldbank.org/en/research/commodity-markets |
 | Crop weights | FAOSTAT, Crops and livestock products (QCL) | https://www.fao.org/faostat/en/#data/QCL |
 | Crop suitability | FAO GAEZ v4 | https://gaez.fao.org/ |
-| Governance | Quality of Government, Standard Time-Series | https://www.gu.se/en/quality-government/qog-data |
 | Controls | World Bank World Development Indicators | https://data.worldbank.org/ |
 
 Download date and version of each file must be written in `docs/data_log.md`.
@@ -65,7 +61,7 @@ Data files are **never pushed to GitHub**: everything in `data/` (and any CSV, E
 
 | What | Where on your computer |
 |---|---|
-| Original downloads (Global Forest Watch, World Bank, FAO, QoG...) | `data/raw/` |
+| Original downloads (Global Forest Watch, World Bank, FAO...) | `data/raw/` |
 | Cleaned files used by the notebooks | `data/processed/` |
 
 **When you start:** download the files from SharePoint and copy them into the same folders on your computer.
@@ -78,7 +74,7 @@ In the notebooks, load the data from the local folder:
 panel = pd.read_csv("../data/processed/panel.csv")
 ```
 
-To rebuild the processed files from scratch, download the raw data from the sources above and run `notebooks/01_data_cleaning.ipynb`.
+To rebuild the processed files from scratch, download the raw data from the sources above and run the cleaning notebooks.
 
 ---
 
@@ -98,7 +94,8 @@ We use **GitHub Desktop** to share code and **PyCharm** to write it. Follow thes
 **1. Before you start**
 - In GitHub Desktop, click **Current Branch** and choose `main`.
 - Click **Fetch origin**, then **Pull origin**. You now have everyone's latest work.
-- Click **Current Branch → New Branch**, give it a clear name (for example `david-prices`), then **Create Branch** and **Publish branch**.
+- Click **Current Branch** and choose **your own branch** (see the table below). The first time, it is already on GitHub: just select it.
+- Click **Branch → Update from main**, so your branch has everyone's merged work.
 
 **2. While you work**
 - Write your code in PyCharm as usual.
@@ -107,17 +104,23 @@ We use **GitHub Desktop** to share code and **PyCharm** to write it. Follow thes
 **3. When your task is finished**
 - Click **Create Pull Request**. This opens GitHub in your browser: click **Create pull request**.
 - Tell the group. Someone else checks it and clicks **Merge pull request**.
-- Back in GitHub Desktop, go back to `main` and click **Pull origin**. Start your next task with a new branch.
+- Back in GitHub Desktop, go back to `main` and click **Pull origin**. For the next task, keep working on your branch (after **Update from main**) or create a new one with **Current Branch → New Branch**.
 
 ### Who works on what
 
-| Person | Task | Their files |
-|---|---|---|
-| Andrew | | |
-| David | | |
-| Pelin | | |
+**Until the midterm (October 15):**
 
-Write your name next to a file before you start working on it. Shared functions go in `src/utils.py`: tell the group before changing it.
+| Person | Task | Their branch | They produce |
+|---|---|---|---|
+| Andrew | Forest loss and initial forest cover (Global Forest Watch): cleaning, maps, univariate | `andrew-forest-loss` | `forest_loss.csv` |
+| David | Prices (Pink Sheet) and weights (FAOSTAT): price index, univariate | `david-prices` | `price_index.csv` |
+| Pelin | Controls (World Bank), merge, bivariate, causality, literature | `pelin-controls-merge` | `panel.csv` |
+
+Each person creates their own notebook in `notebooks/` and is the only one to edit it.
+
+The three notebooks are connected only through the CSV files in `data/processed/`: Andrew and David share their CSV with Pelin on SharePoint, and Pelin's notebook merges them. Nobody opens someone else's notebook to change it.
+
+After the midterm we will split the analysis and the article again, and update this table. Shared functions go in `src/utils.py`: tell the group before changing it.
 
 ### If something goes wrong
 
