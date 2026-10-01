@@ -27,12 +27,12 @@ We study whether increases in world agricultural commodity prices (soybeans, pal
 ├── requirements.txt
 ├── .gitignore
 ├── data/
-│   ├── raw/            # original downloads (NOT committed, see "Where to put the data")
-│   └── processed/      # cleaned CSVs used by the notebooks (NOT committed)
+│   ├── raw/            # original downloads (committed, see "Where to put the data")
+│   └── processed/      # cleaned CSVs used by the notebooks (committed)
 ├── notebooks/
 │   └── ...               # one notebook per person, plus the final graded article
 ├── src/
-│   └── utils.py        # shared functions (loading, plotting style, price index)
+│   └── utils.py        # shared functions and data URLs (loading, plotting style, price index)
 ├── figures/            # exported graphs for slides and article
 └── docs/
     ├── literature.md   # literature review notes
@@ -57,22 +57,25 @@ Download date and version of each file must be written in `docs/data_log.md`.
 
 ## Where to put the data
 
-Data files are **never pushed to GitHub**: everything in `data/` (and any CSV, Excel, Parquet, zip... file) is ignored by `.gitignore`. We share data through the team [SharePoint folder](https://epflch-my.sharepoint.com/:f:/r/personal/andrew_eberhardt_epfl_ch/Documents/DataScienceProject?d=w784b1bac4ebe4103a11e659f2aae055c&csf=1&web=1&e=mt8f2b) instead.
+The graders must be able to run our notebooks from top to bottom without changes, so **all data files are pushed to GitHub** and the notebooks load them with URL links (course guideline). Never load data from a path on your own computer.
 
-| What | Where on your computer |
+| What | Folder in the repo |
 |---|---|
 | Original downloads (Global Forest Watch, World Bank, FAO...) | `data/raw/` |
 | Cleaned files used by the notebooks | `data/processed/` |
 
-**When you start:** download the files from SharePoint and copy them into the same folders on your computer.
+**When you add or update a data file:** save it in the right folder above, then commit and push it like any other file. Also note the source and download date in `docs/data_log.md`.
 
-**When you add or update a data file:** save it in the right folder above, then upload it to SharePoint so the others get it too. Also note the source and download date in `docs/data_log.md`.
+Files must stay under **100 MB** (GitHub refuses bigger files, and warns above 50 MB). If a download is bigger, keep only the countries, years and columns we use and save that smaller file instead.
 
-In the notebooks, load the data from the local folder:
+In the notebooks, load the data from GitHub:
 
 ```python
-panel = pd.read_csv("../data/processed/panel.csv")
+BASE_URL = "https://raw.githubusercontent.com/AndrewEberhardt/DataScienceProject/main/data/"
+panel = pd.read_csv(BASE_URL + "processed/panel.csv")
 ```
+
+The link points to the `main` branch: a file only works at this link once your pull request is merged. Before that, test with your branch name instead of `main` in the URL.
 
 To rebuild the processed files from scratch, download the raw data from the sources above and run the cleaning notebooks.
 
@@ -87,7 +90,7 @@ We use **GitHub Desktop** to share code and **PyCharm** to write it. Follow thes
 1. **Never work on `main`.** Always work on your own branch.
 2. **One notebook = one person.** Never edit a notebook that belongs to someone else. If you need their results, read the CSV file they saved.
 3. **Pull before you start, push when you stop.**
-4. **Never push data files.** Data goes on SharePoint (see above).
+4. **Never load data from your own computer.** Push data files to `data/` and load them with GitHub URL links (see above).
 
 ### Every time you work
 
@@ -118,7 +121,7 @@ We use **GitHub Desktop** to share code and **PyCharm** to write it. Follow thes
 
 Each person creates their own notebook in `notebooks/` and is the only one to edit it.
 
-The three notebooks are connected only through the CSV files in `data/processed/`: Andrew and David share their CSV with Pelin on SharePoint, and Pelin's notebook merges them. Nobody opens someone else's notebook to change it.
+The three notebooks are connected only through the CSV files in `data/processed/`: Andrew and David push their CSV to `data/processed/`, and Pelin's notebook loads them from GitHub and merges them. Nobody opens someone else's notebook to change it.
 
 After the midterm we will split the analysis and the article again, and update this table. Shared functions go in `src/utils.py`: tell the group before changing it.
 

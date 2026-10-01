@@ -1,11 +1,7 @@
 # --- Data ---
-# Keep all data local: nothing under data/ is committed (only the .gitkeep placeholders)
-data/raw/*
-!data/raw/.gitkeep
-data/processed/*
-!data/processed/.gitkeep
-
-# Data files anywhere else in the repo
+# Data files in data/ ARE committed: the graders load them from GitHub with URL links
+# (see README "Where to put the data"). Files must stay under 100 MB (GitHub limit).
+# Data files anywhere else in the repo are ignored:
 *.csv
 *.tsv
 *.xlsx
@@ -33,6 +29,7 @@ data/processed/*
 *.cpg
 *.gpkg
 *.geojson
+!data/**
 
 # --- Python ---
 __pycache__/
