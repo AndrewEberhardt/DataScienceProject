@@ -2,6 +2,7 @@
 pandas
 numpy
 openpyxl        # read Excel files (Pink Sheet, Global Forest Watch)
+country_converter  # country names to ISO3 codes, to merge datasets
 
 # Visualisation
 matplotlib
