@@ -1,6 +1,7 @@
 """Shared helper functions for the project."""
 
-from pathlib import Path
-
-# Local folder with the processed data (not committed to git, see README "Where to put the data")
-DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "processed"
+# Data is loaded from GitHub with URL links, so the notebooks run on any computer
+# (see README "Where to put the data")
+BASE_URL = "https://raw.githubusercontent.com/AndrewEberhardt/DataScienceProject/main/data/"
+RAW_URL = BASE_URL + "raw/"
+PROCESSED_URL = BASE_URL + "processed/"
