@@ -8,3 +8,4 @@
 | GAEZ v4 suitability | https://gaez.fao.org/ |                           |        | |
 | QoG Standard Time-Series | https://www.gu.se/en/quality-government/qog-data |                           |        | |
 | World Bank WDI | https://data.worldbank.org/ |                           |        | |
+|trase.earth     |https://trase.earth/open-data/datasets/spatial-metrics-brazil-soy-soy-deforestation-5-year-total  |                           |        | |
