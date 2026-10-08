@@ -8,4 +8,5 @@
 | GAEZ v4 suitability | https://gaez.fao.org/ |                           |        | |
 | QoG Standard Time-Series | https://www.gu.se/en/quality-government/qog-data |                           |        | |
 | World Bank WDI | https://data.worldbank.org/ |                           |        | |
+| DeDuCE deforestation attributed to commodities | https://github.com/chandrakant6492/DeDuCE | 2001-2023 version, 08.10.2026 | Andrew | `data/raw/crops/`, sheet "Deforestation attribution". Singh & Persson, Nature Food 2026, doi:10.1038/s43016-026-01305-4 |
 |trase.earth     |https://trase.earth/open-data/datasets/spatial-metrics-brazil-soy-soy-deforestation-5-year-total  |                           |        | |
