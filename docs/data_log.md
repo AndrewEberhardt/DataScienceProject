@@ -5,6 +5,7 @@
 | Tree cover loss | https://www.globalforestwatch.org/dashboards/global/ | 30.09.2026                | Andrew | 30% canopy threshold |
 | Commodity prices (Pink Sheet) | https://www.worldbank.org/en/research/commodity-markets |                           |        | |
 | FAOSTAT crops (QCL) | https://www.fao.org/faostat/en/#data/QCL |                           |        | |
+| FAOSTAT producer prices (PP) | https://www.fao.org/faostat/en/#data/PP |                           | David  | `data/raw/crops/FAOSTAT_2.0.csv`. Indonesia palm oil 2001–2023 and Argentina beef 2001–2019 typed in by hand in `david.com.price.ipynb`: source TODO |
 | GAEZ v4 suitability | https://gaez.fao.org/ |                           |        | |
 | QoG Standard Time-Series | https://www.gu.se/en/quality-government/qog-data |                           |        | |
 | World Bank WDI | https://data.worldbank.org/ |                           |        | |
