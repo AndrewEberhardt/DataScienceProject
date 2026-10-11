@@ -25,7 +25,7 @@ Format: max 8 slides, EDA + causality issues. **Draft:** the team rewrites the t
 
 ## 2. Sample and outcome
 
-- Rule fixed in advance: at least 30% of the territory between 30°N and 30°S, and at least 1 Mha of tree cover in 2000 → 63 countries, 2001–2025, balanced panel.
+- Rule fixed in advance: at least 30% of the territory between 30°N and 30°S, and at least 1 Mha of tree cover in 2000 → 62 countries (South Sudan dropped: no data before 2011), 2001–2025, balanced panel.
 - About 278 Mha lost: 129 Mha in Latin America & Caribbean, 80 Mha in Asia-Pacific, 69 Mha in Africa.
 - Permanent agriculture explains 60.1% of the loss → second outcome: agricultural loss rate.
 - Loss rates are very skewed → we use logs.
