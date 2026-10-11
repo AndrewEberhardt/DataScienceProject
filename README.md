@@ -12,7 +12,7 @@ Team: Andrew, David, Pelin
 
 We study whether increases in world agricultural commodity prices (soybeans, palm oil, cocoa, coffee, beef, etc.) cause more deforestation in tropical countries.
 
-- **Outcome:** tree cover loss / primary forest loss (Global Forest Watch)
+- **Outcome:** tree cover loss rate due to permanent agriculture (Global Forest Watch); total and primary forest loss as robustness checks
 - **Main explanatory variable:** country-specific commodity price index (world prices weighted by pre-period crop shares or crop suitability)
 - **Heterogeneity:** initial forest cover in 2000 (Global Forest Watch): is the effect stronger where there was more forest left to clear?
 - **Method:** panel regression with country and year fixed effects, lagged prices

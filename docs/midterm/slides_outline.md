@@ -18,7 +18,7 @@ Format: max 8 slides, EDA + causality issues. **Draft:** the team rewrites the t
 ## 1. Question and approach
 
 - Do world commodity price booms cause more deforestation in tropical countries?
-- Outcome: tree cover loss rate (Global Forest Watch). Explanatory variable: country-specific price shock X, lagged one year.
+- Outcome: agricultural tree cover loss rate (Global Forest Watch); total loss rate as robustness. Explanatory variable: country-specific price shock X, lagged one year.
 - Method (after the midterm): panel regressions with country and year fixed effects.
 - Heterogeneity: is the effect stronger where more forest was left in 2000?
   *To decide:* `1-Forest-Loss.ipynb` also mentions governance as the heterogeneity variable. Pick one for the slide.
@@ -27,7 +27,7 @@ Format: max 8 slides, EDA + causality issues. **Draft:** the team rewrites the t
 
 - Rule fixed in advance: at least 30% of the territory between 30°N and 30°S, and at least 1 Mha of tree cover in 2000 → 62 countries (South Sudan dropped: no data before 2011), 2001–2025, balanced panel.
 - About 278 Mha lost: 129 Mha in Latin America & Caribbean, 80 Mha in Asia-Pacific, 69 Mha in Africa.
-- Permanent agriculture explains 60.1% of the loss → second outcome: agricultural loss rate.
+- Permanent agriculture explains 60.1% of the loss → main outcome: agricultural loss rate (the rest is fires, logging, shifting cultivation, not driven by our prices); total loss rate as robustness.
 - Loss rates are very skewed → we use logs.
 
 ## 3. Which commodities
@@ -53,15 +53,15 @@ Format: max 8 slides, EDA + causality issues. **Draft:** the team rewrites the t
 
 ## 6. Bivariate: raw vs within
 
-- Raw correlation between loss rate and X(t−1): **+0.33**.
-- Within countries (country and year averages removed): **−0.24**.
-- Also removing each country's trend: **−0.02**; year-to-year changes: **−0.06**.
-- Same picture for the agricultural loss rate (+0.35, −0.26, −0.08, −0.07).
+- Raw correlation between agricultural loss rate and X(t−1): **+0.35**.
+- Within countries (country and year averages removed): **−0.26**.
+- Also removing each country's trend: **−0.08**; year-to-year changes: **−0.07**.
+- Same picture for the total loss rate (+0.33, −0.24, −0.02, −0.06).
 
 ## 7. Why the sign flips: trends
 
 - X rises over time in exposed countries (world prices above their 1996–2000 level after 2003).
-- The most exposed countries had flat or falling loss rates: correlation −0.50 between a country's average shock and the trend of its loss rate.
+- The most exposed countries had flat or falling loss rates: correlation −0.51 between a country's average shock and the trend of its agricultural loss rate (−0.50 for the total).
 - The most exposed countries are beef producers with little forest (Zimbabwe, Argentina, South Africa, Nigeria), not the big frontiers.
 - → Fixed effects alone are not enough: we need country trends or first differences.
 
@@ -75,7 +75,7 @@ Format: max 8 slides, EDA + causality issues. **Draft:** the team rewrites the t
 | Common shocks (world demand, 2008 crisis) | year fixed effects |
 | Different trends (Brazil's PPCDAm 2004, Soy Moratorium 2006, Indonesia moratorium 2011) | country trends, first differences |
 | Prices may not reach farmers (beef) | robustness with soy and palm oil only |
-| Non-agricultural loss (fires, logging) | agricultural loss rate as second outcome |
+| Non-agricultural loss (fires, logging) | agricultural loss rate as main outcome, total as robustness |
 | Leakage between countries | limitation |
 
 Next: panel regressions (fixed effects, country trends, first differences, clustered by country), heterogeneity by forest in 2000, controls (World Bank WDI).
