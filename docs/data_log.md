@@ -11,3 +11,5 @@
 | World Bank WDI | https://data.worldbank.org/ |                           |        | |
 | DeDuCE deforestation attributed to commodities | https://github.com/chandrakant6492/DeDuCE | 2001-2023 version, 08.10.2026 | Andrew | `data/raw/crops/`, sheet "Deforestation attribution". Singh & Persson, Nature Food 2026, doi:10.1038/s43016-026-01305-4 |
 |trase.earth     |https://trase.earth/open-data/datasets/spatial-metrics-brazil-soy-soy-deforestation-5-year-total  |                           |        | |
+| FAOSTAT oil palm area harvested | https://www.fao.org/faostat/en/#data/QCL | 09.11.2026 | Andrew | `data/raw/crops/faostat_palm_area_1996_2000.csv`. Domain QCL, item "Oil palm fruit", element "Area harvested", 1996-2000, unit ha. Panama 1996 is missing (flag M) |
+| World Bank land area | https://data.worldbank.org/indicator/AG.LND.TOTL.K2 | 09.11.2026, read through `wbgapi` when the notebook runs | Andrew | Indicator `AG.LND.TOTL.K2`, year 2000, unit km2 (x 100 for ha) |
