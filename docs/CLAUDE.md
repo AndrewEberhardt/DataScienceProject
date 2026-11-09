@@ -54,7 +54,7 @@ Y_palm[i,t] = beta * Exposure_palm[i] * p_palm[t-1] + alpha[i] + delta[t] + e[i,
 ### Variables
 - Outcome `Y_palm[i,t]`: deforestation attributed to oil palm (DeDuCE, `data/processed/
   deduce_selected_commodities.csv`, commodity "Oil palm fruit", column `defor_ha`), divided by tree
-  cover in 2000 (`extent_2000_ha`), times 100. Many zeros (about 17% of country-years): use
+  cover in 2000 (`extent_2000_ha`), times 100. Many zeros (41% of country-years over the 62 countries, 17% among the 44 countries with oil palm rows in DeDuCE): use
   `asinh` of the rate as main transform, report `log(1 + rate)` as a check. DeDuCE covers 2001-2023, so
   the period is 2001-2023. Robustness outcome: agricultural tree cover loss rate from GFW
   (`log_agri_loss_rate`, current Y).
