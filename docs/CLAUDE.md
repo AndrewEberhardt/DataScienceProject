@@ -111,11 +111,19 @@ price).
    0.047 (13 crops, 2001-2025), 0.038 (15 crops, 2001-2018). Output `grid_suitability.csv.gz` (11 MB).
    To do: replace the dominant crop map (misleading: weights are close in humid forests, oil palm never
    wins) by maps of the cocoa and oil palm weights.
-4. NEXT: run `notebooks/4-Grid-Regressions.ipynb` (written, never run). Needs `grid_suitability.csv.gz`
-   pushed to GitHub first. Main spec: OLS, contemporaneous price, cell + country x year FE, cluster by
-   0.5 degree block. Inference section: country clusters, Conley 500/1000 km (own code, 0.5 degree only),
-   permutation of prices across crops (0.5 degree only). Robustness: lags t-1/t-2, canopy 50, PPML,
-   average suitability x year, tropics only. Check run time and memory (about 10 million rows).
+4. Done (18.11.2026): `notebooks/4-Grid-Regressions.ipynb` runs top to bottom (9 min, peak 9.7 GB RAM).
+   OLS asinh: replication 0.5 deg 2001-2018 beta 1.97 (Berman 1.27); 9 km 2001-2018 1.07;
+   MAIN 9 km 2001-2025 0.96 (+0.31 after 2018); 0.5 deg 2001-2025 1.66. Significant with block, country
+   and Conley SE. Permutation of prices across crops (1,000 draws, exact closed-form demeaning, balanced
+   panel): p = 0.10 (replication), 0.06 (9 km 2001-2018), 0.03 (0.5 deg 2001-2025), 0.006 (MAIN).
+   Possible thesis: Berman's design does not pass the permutation test on its own period and resolution;
+   finer cells and the post-2018 shocks (cocoa, coffee) make the result credible.
+   PPML elasticities: 0.5 deg 1.50 / 9 km 1.06 (2001-2018, 15 crops); 0.5 deg 1.07 / 9 km 0.84
+   (2001-2025, 13 crops): about 30% smaller at 9 km. Robustness stable (canopy 50: 0.95, t-1: 0.69,
+   t-2: 0.81, avg suitability x year: 0.96, tropics only: 1.07). Contribution of prices: 55% (Berman 35%).
+   NEXT: (a) 2001-2018 with the 13 crops, to separate period from crop set; (b) spillovers: add the
+   price index of neighbouring cells (may explain the smaller elasticity at 9 km); (c) replication on the
+   whole tropics band to explain 1.97 vs 1.27; (d) lighten notebook 4 for graders (precompute 9 km specs).
 5. New notebook `notebooks/5-Beef-Exports.ipynb`: beef section (David: FAOSTAT beef exports).
 6. Final article notebook (Medium style, max 3,000 words, technical parts in an appendix).
 7. After merging into `main`: switch `BRANCH` to "main" in notebooks 3 and 4.
