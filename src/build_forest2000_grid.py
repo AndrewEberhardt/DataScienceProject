@@ -65,7 +65,7 @@ def tiles_for_sample():
     assert not missing, f"countries not found in Natural Earth: {missing}"
     shape = countries.union_all()
     return [tile_name(top, left)
-            for top in range(80, -50, -10)
+            for top in range(80, -60, -10)
             for left in range(-180, 180, 10)
             if box(left, top - 10, left + 10, top).intersects(shape)]
 
