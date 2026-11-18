@@ -102,13 +102,25 @@ price).
 
 ## Task list (one step at a time, wait for my go between steps)
 1. Done: clean the repository (tag `pre-cleanup`), branch `andrew-cleanup-berman`.
-2. Hansen aggregation to 5 arc-minute cells: `scripts/build_grid_panel.py` (tiles), then
-   `scripts/assemble_grid_panel.py` (countries, validation, `grid_cells.csv.gz`).
-3. GAEZ suitability for the 13 crops (done: rasters in `data/raw/gaez/`). New notebook
-   `notebooks/3-Crop-Price-Index.ipynb`: suitability per cell, alpha, price index, maps.
-4. New notebook `notebooks/4-Grid-Regressions.ipynb`: steps 1 to 6 of the results above.
-5. New notebook `notebooks/5-Beef-Exports.ipynb`: beef section.
+2. Done (18.11.2026): Hansen aggregation to 5 arc-minute cells. 121 tiles (5 ocean tiles do not exist,
+   HTTP 404). `grid_cells.csv.gz`: 511,427 cells, 62 countries, 30 MB. Validation vs GFW (threshold 25):
+   sample totals 1.002 (extent) and 1.001 (loss), every country within 3% except Suriname (loss 1.05,
+   border cells with French Guiana). Raw tiles (29 GB) kept in `~/Data/hansen_gfc_v1.13/`.
+3. Done (18.11.2026): `notebooks/3-Crop-Price-Index.ipynb` runs top to bottom (1.5 min). Within-country
+   share of suitability variance 54-74% (Berman: 50-74%). SD of ln index after cell + country x year FE:
+   0.047 (13 crops, 2001-2025), 0.038 (15 crops, 2001-2018). Output `grid_suitability.csv.gz` (11 MB).
+   To do: replace the dominant crop map (misleading: weights are close in humid forests, oil palm never
+   wins) by maps of the cocoa and oil palm weights.
+4. NEXT: run `notebooks/4-Grid-Regressions.ipynb` (written, never run). Needs `grid_suitability.csv.gz`
+   pushed to GitHub first. Main spec: OLS, contemporaneous price, cell + country x year FE, cluster by
+   0.5 degree block. Inference section: country clusters, Conley 500/1000 km (own code, 0.5 degree only),
+   permutation of prices across crops (0.5 degree only). Robustness: lags t-1/t-2, canopy 50, PPML,
+   average suitability x year, tropics only. Check run time and memory (about 10 million rows).
+5. New notebook `notebooks/5-Beef-Exports.ipynb`: beef section (David: FAOSTAT beef exports).
 6. Final article notebook (Medium style, max 3,000 words, technical parts in an appendix).
+7. After merging into `main`: switch `BRANCH` to "main" in notebooks 3 and 4.
+
+Pushing: git in the Claude Code terminal has no GitHub credentials. Commit there, push with GitHub Desktop.
 
 ## Key references
 - Berman, Couttenier, Leblois, Soubeyran (2023), "Crop prices and deforestation in the tropics", JEEM 119
