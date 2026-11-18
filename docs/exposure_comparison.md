@@ -102,7 +102,7 @@ GAEZ suitability classes (index): very high > 8,500; high 7,000-8,500; good 5,50
 | Variable | Crop suitability index (0-10,000) | continuous, allows any threshold |
 | Crop | Oil palm; Soybean | our two commodities |
 | Water supply | Rainfed | irrigation depends on investment, so it is endogenous |
-| Input level | Low input (robustness: high input) | low input depends least on technology adopted by the country |
+| Input level | High input (robustness: low input) | decided 18.11.2026: with low input, soy is rated marginal in Mato Grosso and Parana, while soy and palm deforestation is driven by commercial, mechanised farms |
 | Climate period | earliest historical baseline available (1961-1990 if offered, else 1981-2010) | must be determined before our sample |
 | Climate data | historical observed (CRU), not a future scenario | |
 | Threshold | index >= 4,000 (robustness: 2,500 and 5,500, and mean index) | standard GAEZ classes |
