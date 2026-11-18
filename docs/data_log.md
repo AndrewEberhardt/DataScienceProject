@@ -6,7 +6,9 @@
 | Commodity prices (Pink Sheet) | https://www.worldbank.org/en/research/commodity-markets |                           |        | |
 | FAOSTAT crops (QCL) | https://www.fao.org/faostat/en/#data/QCL |                           |        | |
 | FAOSTAT producer prices (PP) | https://www.fao.org/faostat/en/#data/PP |                           | David  | `data/raw/crops/FAOSTAT_2.0.csv`. Indonesia palm oil 2001–2023 and Argentina beef 2001–2019 typed in by hand in `david.com.price.ipynb`: source TODO |
-| GAEZ v4 suitability | https://gaez.fao.org/ |                           |        | |
+| GAEZ v4 suitability | https://gaez.fao.org/ (files: https://s3.eu-west-1.amazonaws.com/data.gaezdev.aws.fao.org/res05/CRUTS32/Hist/8110H/sxHr_{crop}.tif) | v4, 18.11.2026            | David  | `data/raw/gaez/`. Theme 4 (res05), suitability index 0 to 10000, high inputs, rainfed, CRU TS 3.2 climate 1981-2010, 5 arc-min grid. Crops: `soy` soybean, `olp` oil palm |
+| Hansen tree cover 2000 (GFC) | https://storage.googleapis.com/earthenginepartners-hansen/GFC-2024-v1.12/download.html | GFC-2024-v1.12, 18.11.2026 | David  | `treecover2000` tiles, not stored (25 GB). Aggregated by `src/build_forest2000_grid.py` to `data/processed/forest2000_5arcmin.csv`: km2 of pixels with canopy > 30% per 5' GAEZ cell |
+| Natural Earth country borders | https://www.naturalearthdata.com/downloads/10m-cultural-vectors/ | 1:10m Admin 0 Countries, 18.11.2026 | David  | `data/raw/boundaries/ne_10m_admin_0_countries.zip`, matched on `ADM0_A3` |
 | QoG Standard Time-Series | https://www.gu.se/en/quality-government/qog-data |                           |        | |
 | World Bank WDI | https://data.worldbank.org/ |                           |        | |
 | DeDuCE deforestation attributed to commodities | https://github.com/chandrakant6492/DeDuCE | 2001-2023 version, 08.10.2026 | Andrew | `data/raw/crops/`, sheet "Deforestation attribution". Singh & Persson, Nature Food 2026, doi:10.1038/s43016-026-01305-4 |
