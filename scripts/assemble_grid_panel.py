@@ -68,6 +68,7 @@ def pixel_area_ha(lat):
 def assign_countries(cells):
     """Return the iso3 of the sample country of each cell (NaN if none)."""
     import geopandas as gpd
+    import shapely
     from shapely.geometry import box
 
     countries = []
@@ -77,18 +78,28 @@ def assign_countries(cells):
         countries.append(g.dissolve().assign(iso3=Path(f).name.split("_")[1])[["iso3", "geometry"]])
     countries = pd.concat(countries, ignore_index=True).set_crs(4326, allow_override=True)
 
+    # Exact borders, split into single polygons so the spatial index only tests nearby shapes
+    exact = countries.explode(index_parts=False).reset_index(drop=True)
+    exact = exact[exact.geom_type == "Polygon"].reset_index(drop=True)     # make_valid can leave lines
     pts = gpd.GeoDataFrame({"i": np.arange(len(cells))}, geometry=gpd.points_from_xy(cells.lon, cells.lat), crs=4326)
-    hit = gpd.sjoin(pts, countries, predicate="within", how="inner").drop_duplicates("i")
+    hit = gpd.sjoin(pts, exact, predicate="within", how="inner").drop_duplicates("i")
     iso = pd.Series(np.nan, index=np.arange(len(cells)), dtype=object)
     iso[hit.i.values] = hit.iso3.values
 
-    # Cells with the center outside every sample country: largest overlap
+    # Cells with the center outside every sample country: largest overlap.
+    # Countries are split into single polygons (islands) and simplified (about 100 m) so that each
+    # coastal cell is intersected with a small nearby shape only. This only decides the country of
+    # the cell; forest and loss counts come from the Hansen pixels and are not affected.
     rest = np.where(iso.isna())[0]
     h = 1 / 24
     boxes = gpd.GeoDataFrame({"i": rest}, geometry=[box(x - h, y - h, x + h, y + h)
                                                      for x, y in zip(cells.lon.values[rest], cells.lat.values[rest])], crs=4326)
-    ov = gpd.overlay(boxes, countries, how="intersection", keep_geom_type=True)
-    ov["a"] = ov.geometry.area
+    parts = exact.copy()
+    parts["geometry"] = parts.geometry.simplify(0.001).make_valid()
+    cand = gpd.sjoin(boxes, parts, predicate="intersects", how="inner")
+    inter = shapely.intersection(np.asarray(cand.geometry.values), np.asarray(parts.geometry.values)[cand.index_right.to_numpy()])
+    ov = pd.DataFrame({"i": cand.i.values, "iso3": cand.iso3.values, "a": shapely.area(inter)})
+    ov = ov.groupby(["i", "iso3"], as_index=False).a.sum()
     best = ov.sort_values("a").drop_duplicates("i", keep="last")
     iso[best.i.values] = best.iso3.values
     print(f"cells assigned by center: {len(hit):,} | by largest overlap: {len(best):,} | outside sample: {iso.isna().sum():,}")
@@ -98,7 +109,8 @@ def assign_countries(cells):
 def validate(cells):
     """Compare country totals (threshold 25) with Global Forest Watch country tables."""
     gfw = pd.read_excel(REPO / "data/raw/forest/global.xlsx", "Country tree cover loss")
-    gfw = gfw[gfw.threshold == 25]
+    # GFW splits some countries in several rows (India and its disputed areas): sum them
+    gfw = gfw[gfw.threshold == 25].drop(columns="threshold").groupby("country", as_index=False).sum(numeric_only=True)
     names = pd.read_csv(REPO / "data/processed/shock_panel.csv")[["iso3", "country"]].drop_duplicates()
     gfw = gfw.merge(names, on="country")
     a = cells.pixel_area_ha

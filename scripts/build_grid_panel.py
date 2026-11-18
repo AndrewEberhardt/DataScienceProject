@@ -23,6 +23,7 @@ Usage:
 import argparse
 import glob
 import os
+import shutil
 import time
 import urllib.request
 import zipfile
@@ -80,12 +81,14 @@ def download(tile, layer):
     """Download one Hansen layer for one tile, skipping files already complete."""
     url = HANSEN_URL.format(layer=layer, tile=tile)
     path = RAW_DIR / os.path.basename(url)
-    with urllib.request.urlopen(urllib.request.Request(url, method="HEAD")) as r:
+    with urllib.request.urlopen(urllib.request.Request(url, method="HEAD"), timeout=60) as r:
         size = int(r.headers["Content-Length"])
     if path.exists() and path.stat().st_size == size:
         return path
     tmp = path.with_suffix(".part")
-    urllib.request.urlretrieve(url, tmp)
+    # Timeout so that a stalled connection fails instead of blocking the run forever
+    with urllib.request.urlopen(url, timeout=120) as r, open(tmp, "wb") as f:
+        shutil.copyfileobj(r, f, length=1 << 20)
     if tmp.stat().st_size != size:
         raise IOError(f"incomplete download: {url}")
     tmp.rename(path)
