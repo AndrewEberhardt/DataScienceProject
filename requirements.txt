@@ -18,6 +18,7 @@ wbgapi          # World Bank indicators
 
 # Maps (final report, regional version)
 geopandas
+rasterio        # read GAEZ suitability rasters
 rasterstats
 
 # Notebooks
