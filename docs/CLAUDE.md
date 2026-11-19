@@ -120,8 +120,9 @@ price).
    finer cells and the post-2018 shocks (cocoa, coffee) make the result credible.
    PPML elasticities: 0.5 deg 1.50 / 9 km 1.06 (2001-2018, 15 crops); 0.5 deg 1.07 / 9 km 0.84
    (2001-2025, 13 crops): about 30% smaller at 9 km. Robustness stable (canopy 50: 0.95, t-1: 0.69,
-   t-2: 0.81, avg suitability x year: 1.19, tropics only: 1.07). Contribution of prices: 77% (Berman 35%).
-   (19.11.2026: decile model, contribution and avg suitability x year corrected; they were misaligned
+   t-2: 0.81, avg suitability x year: 1.19, tropics only: 1.07). Contribution of prices (share of predicted deforestation due to price changes, as Berman: "responsible
+   for 35% of predicted forest loss"): MAIN 44%, replication 0.5 deg 2001-2018 56% (Berman 35%).
+   (19.11.2026: contribution was (obs-cf)/cf = 77%, now (obs-cf)/obs. Decile model, contribution and avg suitability x year corrected; they were misaligned
    because pyfixest with copy_data=False resets the DataFrame index. Use `panel_pos()`, never `d.index`.)
    (a) Done (19.11.2026), section 9: 2001-2018 with 13 crops gives 2.07 (0.5 deg) and 1.12 (9 km), close
    to 15 crops (1.97 / 1.07): the crop set barely moves beta, the lower beta over 2001-2025 comes from the
@@ -136,8 +137,15 @@ price).
    `grid_protected.csv.gz`): interaction lnP x share protected before 2001. Raw +0.06 (ns); with forest
    deciles x lnP -0.30; strict (IUCN I-IV) -0.33, with deciles -0.63; share protected 2001-2025 +0.26
    (new areas created where pressure was high: selection, not causal).
-   NEXT: check the 77% contribution over 2001-2018; (c) replication on the
-   whole tropics band to explain 1.97 vs 1.27; (d) lighten notebook 4 for graders (precompute 9 km specs).
+   (c) Done (19.11.2026), section 12, `scripts/compare_berman.py` -> `berman_comparison.csv`, `berman_prices.csv`.
+   Berman replication data (Zenodo 7044013, in ~/Data/berman_replication/). His regression in Python on his data: 1.267 (0.088), exact. Matched
+   0.5 deg cells: 11,856 common; deforestation identical (corr 1.00, totals 0.997), forest 2000 0.993.
+   Our outcome + his index: 1.315; our outcome + our index: 2.19 on the same cells. The whole gap is the
+   price index: (1) price series: his banana and sugar differ from ours (his sugar is not "Sugar, world";
+   his banana alone moves 2.19 to 1.79, his sugar alone to 2.05); (2) GAEZ v3 vs v4 weights (rice 18% vs
+   11%, corr of weights 0.7-0.9); (3) an undocumented step: his index rebuilt from his own files gives 1.69
+   (within corr 0.996 with his index), not 1.27. Sign and significance hold in every variant (1.2 to 2.2).
+   NEXT: (d) lighten notebook 4 for graders (precompute 9 km specs).
 5. New notebook `notebooks/5-Beef-Exports.ipynb`: beef section (David: FAOSTAT beef exports).
 6. Final article notebook (Medium style, max 3,000 words, technical parts in an appendix).
 7. After merging into `main`: switch `BRANCH` to "main" in notebooks 3 and 4.
