@@ -109,8 +109,8 @@ price).
 3. Done (18.11.2026): `notebooks/3-Crop-Price-Index.ipynb` runs top to bottom (1.5 min). Within-country
    share of suitability variance 54-74% (Berman: 50-74%). SD of ln index after cell + country x year FE:
    0.047 (13 crops, 2001-2025), 0.038 (15 crops, 2001-2018). Output `grid_suitability.csv.gz` (11 MB).
-   To do: replace the dominant crop map (misleading: weights are close in humid forests, oil palm never
-   wins) by maps of the cocoa and oil palm weights.
+   Done (19.11.2026): weight maps of the 13 crops (same colour scale, `crop_weight_maps.png`) and of the
+   4 forest-risk crops for the article (cocoa, oil palm, soybean, coffee, `crop_weight_maps_article.png`).
 4. Done (18.11.2026): `notebooks/4-Grid-Regressions.ipynb` runs top to bottom (9 min, peak 9.7 GB RAM).
    OLS asinh: replication 0.5 deg 2001-2018 beta 1.97 (Berman 1.27); 9 km 2001-2018 1.07;
    MAIN 9 km 2001-2025 0.96 (+0.31 after 2018); 0.5 deg 2001-2025 1.66. Significant with block, country
@@ -145,7 +145,11 @@ price).
    his banana alone moves 2.19 to 1.79, his sugar alone to 2.05); (2) GAEZ v3 vs v4 weights (rice 18% vs
    11%, corr of weights 0.7-0.9); (3) an undocumented step: his index rebuilt from his own files gives 1.69
    (within corr 0.996 with his index), not 1.27. Sign and significance hold in every variant (1.2 to 2.2).
-   NEXT: (d) lighten notebook 4 for graders (precompute 9 km specs).
+   (d) Done (19.11.2026): switch RECOMPUTE (default False) in notebook 4. 9 km models are in `if RECOMPUTE:`
+   blocks; their results are read from `data/processed/results/` (10 CSV, 76 KB). Default run: 75 s,
+   about 3 GB RAM (0.5 deg models estimated live). RECOMPUTE = True: about 15 min, 10 GB, rewrites the CSV
+   (identical numbers checked). Any change to a 9 km model needs a RECOMPUTE run and a commit of results/.
+   NEXT: plan of the final article (task 6).
 5. New notebook `notebooks/5-Beef-Exports.ipynb`: beef section (David: FAOSTAT beef exports).
 6. Final article notebook (Medium style, max 3,000 words, technical parts in an appendix).
 7. After merging into `main`: switch `BRANCH` to "main" in notebooks 3 and 4.
