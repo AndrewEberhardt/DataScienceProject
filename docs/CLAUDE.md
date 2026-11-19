@@ -132,8 +132,11 @@ price).
    the far ring absorbs everything (1.27-1.30), total 1.43. Not local spillovers: deforestation responds
    to the crop mix of the whole region (about 100 km). Neighbour indices explain 91% of the within
    variation of the own index.
-   NEXT: protected areas (WDPA data done: `scripts/build_protected_areas.py`, `grid_protected.csv.gz`):
-   lnP x pa2000 interaction, does protection dampen the price effect? Later: (c) replication on the
+   Protected areas Done (19.11.2026), section 11 (WDPA Nov 2026, `scripts/build_protected_areas.py`,
+   `grid_protected.csv.gz`): interaction lnP x share protected before 2001. Raw +0.06 (ns); with forest
+   deciles x lnP -0.30; strict (IUCN I-IV) -0.33, with deciles -0.63; share protected 2001-2025 +0.26
+   (new areas created where pressure was high: selection, not causal).
+   NEXT: check the 77% contribution over 2001-2018; (c) replication on the
    whole tropics band to explain 1.97 vs 1.27; (d) lighten notebook 4 for graders (precompute 9 km specs).
 5. New notebook `notebooks/5-Beef-Exports.ipynb`: beef section (David: FAOSTAT beef exports).
 6. Final article notebook (Medium style, max 3,000 words, technical parts in an appendix).
