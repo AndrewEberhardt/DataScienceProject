@@ -120,9 +120,20 @@ price).
    finer cells and the post-2018 shocks (cocoa, coffee) make the result credible.
    PPML elasticities: 0.5 deg 1.50 / 9 km 1.06 (2001-2018, 15 crops); 0.5 deg 1.07 / 9 km 0.84
    (2001-2025, 13 crops): about 30% smaller at 9 km. Robustness stable (canopy 50: 0.95, t-1: 0.69,
-   t-2: 0.81, avg suitability x year: 0.96, tropics only: 1.07). Contribution of prices: 55% (Berman 35%).
-   NEXT: (a) 2001-2018 with the 13 crops, to separate period from crop set; (b) spillovers: add the
-   price index of neighbouring cells (may explain the smaller elasticity at 9 km); (c) replication on the
+   t-2: 0.81, avg suitability x year: 1.19, tropics only: 1.07). Contribution of prices: 77% (Berman 35%).
+   (19.11.2026: decile model, contribution and avg suitability x year corrected; they were misaligned
+   because pyfixest with copy_data=False resets the DataFrame index. Use `panel_pos()`, never `d.index`.)
+   (a) Done (19.11.2026), section 9: 2001-2018 with 13 crops gives 2.07 (0.5 deg) and 1.12 (9 km), close
+   to 15 crops (1.97 / 1.07): the crop set barely moves beta, the lower beta over 2001-2025 comes from the
+   period. But permutation p drops to 0.022 (0.5 deg) and 0.004 (9 km) with 13 crops: the weak p of the
+   replication comes from barley and sorghum, so the thesis above must be nuanced.
+   (b) Done (19.11.2026), section 10: adding the price index of neighbouring land (rings 9-18, 18-30,
+   30-55 km and a far ring 60-110 km) moves the effect to the neighbours (own cell 0.97 -> 0.16-0.18);
+   the far ring absorbs everything (1.27-1.30), total 1.43. Not local spillovers: deforestation responds
+   to the crop mix of the whole region (about 100 km). Neighbour indices explain 91% of the within
+   variation of the own index.
+   NEXT: protected areas (WDPA data done: `scripts/build_protected_areas.py`, `grid_protected.csv.gz`):
+   lnP x pa2000 interaction, does protection dampen the price effect? Later: (c) replication on the
    whole tropics band to explain 1.97 vs 1.27; (d) lighten notebook 4 for graders (precompute 9 km specs).
 5. New notebook `notebooks/5-Beef-Exports.ipynb`: beef section (David: FAOSTAT beef exports).
 6. Final article notebook (Medium style, max 3,000 words, technical parts in an appendix).
