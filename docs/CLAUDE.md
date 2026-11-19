@@ -170,5 +170,5 @@ Pushing: git in the Claude Code terminal has no GitHub credentials. Commit there
 - Singh and Persson (2026), DeDuCE: deforestation attributed to commodities (beef section).
 
 ## Deadline
-Final deliverable: December 19 at 16:00. Medium-style notebook article, max 3,000 words, technical
+Final deliverable: December 18 at 16:00 (MGT-499 guidelines, docs/MGT-499_Project-guidelines.docx.pdf). Medium-style notebook article, max 3,000 words, technical
 parts in an appendix. The notebook must run top to bottom from GitHub data.
