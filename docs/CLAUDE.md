@@ -152,6 +152,10 @@ price).
    NEXT: plan of the final article (task 6).
 5. New notebook `notebooks/5-Beef-Exports.ipynb`: beef section (David: FAOSTAT beef exports).
 6. Final article notebook (Medium style, max 3,000 words, technical parts in an appendix).
+   Skeleton done (19.11.2026): `notebooks/6-Article.ipynb`, 8 sections + appendix, 9 figures/tables, all code
+   reads small files (results/summary.csv, inference.csv, contribution.csv exported by notebook 4); runs in
+   about 6 s. Every prose block is a "To write (Andrew)" placeholder with the points and numbers to cite.
+   A word count cell checks the 3,000 word limit. Section 7 (beef) waits for task 5.
 7. After merging into `main`: switch `BRANCH` to "main" in notebooks 3 and 4.
 
 Pushing: git in the Claude Code terminal has no GitHub credentials. Commit there, push with GitHub Desktop.
