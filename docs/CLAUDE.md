@@ -42,6 +42,8 @@ A flag `in_tropics` marks cells within 23.44 N / S (the band of Berman et al.).
    were tried and dropped: placebos and trend tests failed, national policies confound the result.
    The code is kept under the git tag `pre-cleanup` (notebooks 3 to 6).
 4. Final design: replicate and extend Berman et al. (2023) at a finer resolution and over a longer period.
+5. Beef tested directly (notebook 5): with world prices its effect cannot be identified (it is confounded
+   with the trend of cattle areas), which is why the index keeps the 13 crops.
 
 ## Research design: Berman et al. (2023), finer and longer
 
@@ -93,12 +95,17 @@ asinh(Defor[c,t]) = beta * ln(Price[c,t]) + eta[c] + nu[country, t] + e[c,t]
 6. Robustness: canopy 50 percent, PPML, lags, average suitability x year FE, without large producers,
    Conley SE, regions separately.
 
-### Beef (separate section)
-World beef prices reach local markets only in exporting countries. Show that the link between the beef
-price and cattle-driven deforestation (DeDuCE, "Cattle meat") appears only where the export share
-(FAOSTAT trade, exports / production) is high (Brazil, Paraguay, Argentina...). This explains why beef
-is not in the crop price index. Berman et al. treat beef in their appendix (pasture suitability x beef
-price).
+### Beef (separate section, done in notebook 5)
+Cell level: `asinh(Defor[c,t]) = beta ln Price[c,t] + gamma ln P_beef[t] x ln(1 + Cattle2000[c])`
++ average suitability x year + cell FE + country x year FE. Cattle density in 2000 from AGLW (Du et al.
+2025), a map that is not shaped by our period (within-country correlation 0.19 with crop suitability).
+Country level: DeDuCE "Cattle meat" deforestation on ln P_beef x export share (FAOSTAT trade, exports /
+production of item 1806), and on local producer prices (FAOSTAT PP). Berman et al. only add meat to their
+index in an appendix (1.27 -> 1.54 on their data; the two indices have a within correlation of 0.98), they
+never estimate a beef effect on its own.
+Tried and dropped: GAEZ Napier grass (`nap`) as pasture suitability (within-country correlation 0.83 with
+crop suitability, gave an unstable negative sign); Berman's `meat` layer (undocumented, 0.88 correlated with
+his `energy` layer).
 
 ## Task list (one step at a time, wait for my go between steps)
 1. Done: clean the repository (tag `pre-cleanup`), branch `andrew-cleanup-berman`.
@@ -150,13 +157,29 @@ price).
    about 3 GB RAM (0.5 deg models estimated live). RECOMPUTE = True: about 15 min, 10 GB, rewrites the CSV
    (identical numbers checked). Any change to a 9 km model needs a RECOMPUTE run and a commit of results/.
    NEXT: plan of the final article (task 6).
-5. New notebook `notebooks/5-Beef-Exports.ipynb`: beef section (David: FAOSTAT beef exports).
+5. Done (20.11.2026): `notebooks/5-Beef-Exports.ipynb` runs top to bottom from GitHub (20 s, 1.8 GB RAM;
+   RECOMPUTE = True: about 4 min, 10 GB, rewrites `results/beef_grid_9km.csv`). Inputs built once by
+   `scripts/build_beef_data.py` from raw data outside the repo (AGLW `Cattl_2000.tif` extracted alone from the
+   7.4 GB Zenodo archive with HTTP range requests, in `~/Data/aglw/`; FAOSTAT trade in `~/Data/faostat_tcl/`):
+   `grid_cattle.csv.gz`, `beef_export_share.csv`. Export for the article: `results/beef_summary.csv`.
+   Cell level (9 km, 2001-2025, SE by country): beef term -0.26 (0.06), the same with 3- and 5-year moving
+   averages and 5-year periods; forest 2000 x year: -0.21; + cattle x linear trend: -0.03 (0.11); + trend and
+   forest: -0.01; beef price without its trend: -0.03. By region: Latin America -0.35 without trend, +0.09
+   (0.12) with regional trends. The negative sign is a trend: deforestation moved away from old cattle areas
+   while the real beef price doubled (114 -> 244, 2000 = 100). The crop index stays at 0.94-1.23.
+   Country level: export share x beef price on cattle deforestation, nothing in any version (SE 1.5 to 7);
+   placebo on crop deforestation significant once (-10.1, p = 0.04): noise. Brazil is 68% of cattle
+   deforestation (31.9 of 46.9 Mha) and only became an exporter after 2000 (share 2% in 1996-2000, 20% in
+   2001-2023). Local producer prices: the 14 countries with 10+ years make 6% of cattle deforestation
+   (Brazil 2001-2006 only), coefficient negative (reverse causality), not causal.
 6. Final article notebook (Medium style, max 3,000 words, technical parts in an appendix).
-   Skeleton done (19.11.2026): `notebooks/6-Article.ipynb`, 8 sections + appendix, 9 figures/tables, all code
-   reads small files (results/summary.csv, inference.csv, contribution.csv exported by notebook 4); runs in
-   about 6 s. Every prose block is a "To write (Andrew)" placeholder with the points and numbers to cite.
-   A word count cell checks the 3,000 word limit. Section 7 (beef) waits for task 5.
-7. After merging into `main`: switch `BRANCH` to "main" in notebooks 3 and 4.
+   Skeleton done (19.11.2026): `notebooks/6-Article.ipynb`, 11 sections + appendix, all code reads small files
+   (results/summary.csv, inference.csv, contribution.csv exported by notebook 4, beef_grid_9km.csv and
+   beef_summary.csv exported by notebook 5); runs in about 1 min from GitHub. Every prose block is a
+   "To write (Andrew)" placeholder with the points and numbers to cite. A word count cell checks the 3,000
+   word limit. Section 9 (beef) done (20.11.2026): points to write, figure (beef term with and without the
+   trend of cattle areas), Appendix A.5 (all beef estimates); AI tools and Reproducibility are now A.6 / A.7.
+7. After merging into `main`: switch `BRANCH` to "main" in notebooks 3, 4, 5 and 6.
 
 Pushing: git in the Claude Code terminal has no GitHub credentials. Commit there, push with GitHub Desktop.
 
@@ -168,6 +191,10 @@ Pushing: git in the Claude Code terminal has no GitHub credentials. Commit there
 - Goldsmith-Pinkham, Sorkin and Swift (2020), AER: shift-share identification from the shares.
 - Harding et al. (2021): commodity prices and deforestation in Brazil (cited by Berman et al.).
 - Singh and Persson (2026), DeDuCE: deforestation attributed to commodities (beef section).
+- Du et al. (2025), "Annual global grided livestock mapping from 1961 to 2021", ESSD 17, 5543-5556 (AGLW,
+  Zenodo 17128483): cattle density in 2000 (beef section).
+- Assuncao, Gandour and Rocha (2015), Environment and Development Economics: in the Amazon, crop prices
+  raise deforestation but the effect of cattle prices is mixed (supports our beef result).
 
 ## Deadline
 Final deliverable: December 18 at 16:00 (MGT-499 guidelines, docs/MGT-499_Project-guidelines.docx.pdf). Medium-style notebook article, max 3,000 words, technical
