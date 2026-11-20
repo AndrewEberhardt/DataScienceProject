@@ -1,0 +1,34 @@
+level,model,term,Estimate,SE,N
+9 km cells,1 Annual beef price,lnP,1.0818511482324478,0.199994067891474,11354300
+9 km cells,1 Annual beef price,beef,-0.2559266252945327,0.0631997183687652,11354300
+9 km cells,2 3-year moving average,lnP,1.0894389373269409,0.2028197879529615,11354300
+9 km cells,2 3-year moving average,beef_ma3,-0.2727791224546826,0.0715994622615903,11354300
+9 km cells,3 5-year moving average,lnP,1.0893786328477126,0.1951698108187925,11354300
+9 km cells,3 5-year moving average,beef_ma5,-0.2572446624880353,0.0640773861573485,11354300
+9 km cells,4 + forest 2000 x year,lnP,0.943316552105236,0.1627961345383369,11354300
+9 km cells,4 + forest 2000 x year,beef,-0.2112825146119865,0.0578995305864749,11354300
+9 km cells,5 + cattle x trend,lnP,1.0775776791192735,0.1971606483574675,11354300
+9 km cells,5 + cattle x trend,beef,-0.0317557316989086,0.1137656010857551,11354300
+9 km cells,6 + cattle x trend + forest 2000 x year,lnP,0.9401494881483278,0.1617221029223771,11354300
+9 km cells,6 + cattle x trend + forest 2000 x year,beef,-0.0123759717062776,0.1122822375470244,11354300
+9 km cells,7 Beef price without its trend,lnP,1.2259706650739597,0.2649465804182663,11354300
+9 km cells,7 Beef price without its trend,beef_detr,-0.0292506089656151,0.1132220322201909,11354300
+9 km cells,8 By region,beef_LA,-0.3513966779489059,0.0514703012750201,11354300
+9 km cells,8 By region,beef_AF,-0.1943123564791003,0.1676103708706089,11354300
+9 km cells,8 By region,beef_AP,-0.1028505818470209,0.0817561754953459,11354300
+9 km cells,9 By region + cattle x trend by region,beef_LA,0.0867320410833065,0.1232290152694937,11354300
+9 km cells,9 By region + cattle x trend by region,beef_AF,-0.2097968271655292,0.1264409428240408,11354300
+9 km cells,9 By region + cattle x trend by region,beef_AP,-0.158589613733654,0.139317602323314,11354300
+9 km cells,10 5-year periods (long differences),lnP,3.5045109670573056,0.7137460580486247,2270860
+9 km cells,10 5-year periods (long differences),beef,-0.28166723570907,0.0852848689193369,2270860
+"countries, export share","Cattle, export share 1996-2000",beef x share,3.4494735360640125,6.93001182399659,1403
+"countries, export share","Cattle, export share 2001-2023",beef x share,-0.21010670545769375,3.2770023168705813,1403
+"countries, export share","Cattle, exporter (share > 10%)",beef x share,-0.5259107331510114,1.4806362239909607,1426
+"countries, export share","Cattle, share 2001-2023 + country trends",beef x share,0.6842646072348223,2.3851432026361534,1403
+"countries, export share","Cattle, share 2001-2023, without Brazil",beef x share,-0.09104506575978184,3.311322395150318,1380
+"countries, export share","Placebo crops, export share 1996-2000",beef x share,-10.097905957675925,4.884463821899219,1403
+"countries, export share","Placebo crops, export share 2001-2023",beef x share,-2.8918019994852426,3.465517435085777,1403
+"countries, local price","Cattle, local price t",local price,-0.7842949508829428,0.8855295828103049,249
+"countries, local price","Cattle, local price t-1",local price,-1.9296484070236912,1.0709562252677927,241
+"countries, local price","Cattle, local price t-1 + country trends",local price,-0.48734496136293026,1.1803227112256498,241
+"countries, local price","Placebo crops, local price t-1",local price,1.3974569609809055,1.05590594202982,241
