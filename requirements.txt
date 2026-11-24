@@ -12,6 +12,7 @@ plotly
 # Econometrics
 statsmodels
 linearmodels    # panel regressions with fixed effects
+pyfixest        # grid-cell regressions with several high-dimensional fixed effects
 
 # Data access
 wbgapi          # World Bank indicators

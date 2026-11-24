@@ -138,7 +138,7 @@ After the midterm we will split the analysis and the article again, and update t
 | Date | Milestone |
 |---|---|
 | Oct 15 | Midterm presentation (max 8 slides, EDA + causality issues) |
-| Dec 19, 16:00 | Final notebook uploaded to Moodle |
+| Dec 18, 16:00 | Final notebook uploaded to Moodle |
 
 ---
 

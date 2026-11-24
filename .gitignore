@@ -50,3 +50,6 @@ Thumbs.db
 
 # --- Secrets ---
 .env
+
+# Office lock files
+~$*
