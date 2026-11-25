@@ -44,6 +44,12 @@ A flag `in_tropics` marks cells within 23.44 N / S (the band of Berman et al.).
 4. Final design: replicate and extend Berman et al. (2023) at a finer resolution and over a longer period.
 5. Beef tested directly (notebook 5): with world prices its effect cannot be identified (it is confounded
    with the trend of cattle areas), which is why the index keeps the 13 crops.
+6. After the meeting with the professor (25.11.2026: interpret the results in numbers, think about
+   controls, so causality): the Berman design fails a leads test (the index of t+2 predicts deforestation
+   as well as the index of t), so its effect mixes prices with regional deforestation trends. Controls for
+   characteristics of 2000 x year and province x year fixed effects divide it by about 3 (main model 0.37,
+   lower bound 0.12 with cell trends). New message: crop prices do raise deforestation, about 16% of tree
+   cover loss over 2001-2025 (45 Mha), against 36% with the Berman design.
 
 ## Research design: Berman et al. (2023), finer and longer
 
@@ -68,6 +74,19 @@ asinh(Defor[c,t]) = beta * ln(Price[c,t]) + eta[c] + nu[country, t] + e[c,t]
 - Standard errors: clustered at a level coarser than the 9 km cell (0.5 degree block or GADM province),
   because neighbouring cells are strongly correlated; Conley (500 and 1000 km) as robustness.
   Berman et al. cluster by 0.5 degree cell.
+
+### Main model (since 25.11.2026, notebook 4 section 14, step 4 of the controls ladder)
+```
+asinh(Defor[c,t]) = beta * ln(Price[c,t]) + eta[c] + nu[province, t] + mu[forest decile, t]
+                    + gamma_t * (share protected 2000, ln(1 + cattle 2000), average suitability)[c] + e[c,t]
+```
+- `nu[province,t]`: GADM 4.1 level-1 province x year (1,275 provinces), assigned in notebook 4
+  (`assign_provinces`, cell center, else nearest province of the same country).
+- Controls: only characteristics measured in 2000, interacted with year. Nothing measured after 2000
+  (roads, population, farm area): prices may have changed it (bad controls).
+- Lower bound: + a linear trend for each cell (`cell_id[t]` in pyfixest). The Berman design (cell +
+  country x year only) is kept as the comparison.
+- Sample: cells with a cattle density and a protected share (474,721 of 511,427).
 
 ### Variables and choices
 - Cells: GAEZ v4 grid, 5 arc-minutes (about 9.2 km at the equator), 2160 x 4320, EPSG:4326.
@@ -179,7 +198,30 @@ his `energy` layer).
    "To write (Andrew)" placeholder with the points and numbers to cite. A word count cell checks the 3,000
    word limit. Section 9 (beef) done (20.11.2026): points to write, figure (beef term with and without the
    trend of cattle areas), Appendix A.5 (all beef estimates); AI tools and Reproducibility are now A.6 / A.7.
-7. After merging into `main`: switch `BRANCH` to "main" in notebooks 3, 4, 5 and 6.
+   Updated (25.11.2026): To write points of the hook and sections 4, 5, 10, 11 rewritten with the main model;
+   code reads controls_9km.csv, identification_9km.csv and effect_size_9km.csv (ladder figure in section 4,
+   share figure in section 5, full tables in A.3); contribution.csv (old 44%) is no longer used.
+7. Done (25.11.2026), after the meeting with the professor, in notebook 4 (default run 84 s from GitHub):
+   (a) Section 13, identification checks, `results/identification_9km.csv` (RECOMPUTE: about 4 min, 13 GB):
+   province x year FE 0.38; leads of the index in the Berman design fail (t 1.04, t+1 -0.06, t+2 0.98);
+   cell trends 0.13; first differences 0.22; leave one crop out 0.75 (banana) to 1.17 (cocoa). At 0.5 degree:
+   cell trends 0.05 (ns), first differences 0.26. Figure `leave_one_crop_out.png`.
+   (b) Section 14, controls ladder, `results/controls_9km.csv` (RECOMPUTE: about 30 min, more than 10 GB):
+   1. cell + country x year 0.99; 2. + forest 2000 deciles x year 0.64; 3. + protected, cattle, average
+   suitability (2000) x year 0.72; 4. province x year (MAIN) 0.37; 5. + cell trends 0.12. Detrended index
+   (each crop price divided by its log-linear trend 2001-2025): 0.26, 0.27, 0.25, 0.15, 0.14, but unstable
+   across periods (0.57 for 2001-2018, 0.06 for 2001-2023) and its t+1 lead is significant: a check only.
+   Figures `controls_ladder.png`, `detrended_prices.png`.
+   (c) Section 15, size of the effect, `results/effect_size_9km.csv`: sample loss 285.9 Mha (11.4 Mha per
+   year). Main model: typical shock (SD of ln index after cell + province x year FE, 0.032) +1.2%; all prices
+   +10% = +0.40 Mha per year; share of 2001-2025 loss due to prices 16% (45 Mha, CI 13-19%), Berman design 36%
+   (104 Mha), lower bound 5%; 2024 cocoa spike (+121% real) +3.2% (0.73 Mha). Formula: loss x
+   exp(-beta (lnP - lnP 2001)) with observed loss (not the decile model of section 6). GAEZ spreads cocoa over
+   all humid forests (median weight 7%, max 21%), so no cocoa map by country. Figure `share_due_to_prices.png`.
+   Shared doc for the professor (Claude Docs, English): https://claude.ai/artifact/QAi9Ak2BU776rzYqUDRjFw.
+   NEXT: depending on the professor, rerun neighbours (section 10) and protected areas (section 11) with the
+   main model; then the user writes the article text.
+8. After merging into `main`: switch `BRANCH` to "main" in notebooks 3, 4, 5 and 6.
 
 Pushing: git in the Claude Code terminal has no GitHub credentials. Commit there, push with GitHub Desktop.
 
