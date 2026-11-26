@@ -169,8 +169,9 @@ his `energy` layer).
    Our outcome + his index: 1.315; our outcome + our index: 2.19 on the same cells. The whole gap is the
    price index: (1) price series: his banana and sugar differ from ours (his sugar is not "Sugar, world";
    his banana alone moves 2.19 to 1.79, his sugar alone to 2.05); (2) GAEZ v3 vs v4 weights (rice 18% vs
-   11%, corr of weights 0.7-0.9); (3) an undocumented step: his index rebuilt from his own files gives 1.69
-   (within corr 0.996 with his index), not 1.27. Sign and significance hold in every variant (1.2 to 2.2).
+   11%, corr of weights 0.7-0.9; our weights + his prices 1.69, his weights + our prices 2.11: prices matter
+   more); (3) an undocumented step: his index rebuilt from his own files gives 1.75 (within corr 0.996 with
+   his index), not 1.31 (his index on the common cells). Sign and significance hold in every variant (1.2 to 2.2).
    (d) Done (19.11.2026): switch RECOMPUTE (default False) in notebook 4. 9 km models are in `if RECOMPUTE:`
    blocks; their results are read from `data/processed/results/` (10 CSV, 76 KB). Default run: 75 s,
    about 3 GB RAM (0.5 deg models estimated live). RECOMPUTE = True: about 15 min, 10 GB, rewrites the CSV
